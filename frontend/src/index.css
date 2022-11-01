@@ -21,8 +21,27 @@ code {
     overflow: scroll;
 }
 
+.table1{
+  position:relative;
+  background-color: white;
+  border: 1;
+}
+
 Table thead{
   position:sticky;
   top: 0px;
   margin: 0 0 0 0;
+}
+
+.form1{
+ 
+  padding: 20px;
+  width: 40%;
+  margin-left: 100px;
+  
+}
+
+input[type=text]:disabled{
+  border:none;
+  background-color:white;
 }

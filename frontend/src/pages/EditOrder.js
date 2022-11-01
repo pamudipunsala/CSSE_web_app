@@ -1,9 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom';
+import emailjs from '@emailjs/browser';
 
 function EditOrder() {
     const { id } = useParams();
+    const form = useRef();
 
     const [supplier, setSupplier] = useState('');
     const [reqDate, setReqDate] = useState('');
@@ -14,6 +16,7 @@ function EditOrder() {
     const [contact, setContact] = useState('');
     const [email, setEmail] = useState('');
     const [adInfo, setAdInfo] = useState('');
+    const [items, setItems] = useState(['']);
     const [status, setStatus] = useState('');
 
 
@@ -31,6 +34,7 @@ function EditOrder() {
             setContact(orderDetail.contact)
             setEmail(orderDetail.email)
             setAdInfo(orderDetail.adInfo)
+            setItems(orderDetail.items)
             setStatus(orderDetail.status)
         })
 
@@ -49,9 +53,18 @@ function EditOrder() {
             contact,
             email,
             adInfo,
+            items,
             status
+            
         }
         axios.put(`http://localhost:7000/order/update/${id}`, orderlist)
+        emailjs.send('service_po4f3vc', 'template_mzpvntf', orderlist, 'r0p6mYficqz5Ov-qX')
+        .then(function(response) {
+            console.log('SUCCESS!', response.status, response.text);
+         }, function(error) {
+            console.log('FAILED...', error);
+         });
+        
         alert("Mail Sent Successfully")
         window.location.href = ('/orders')
     }
@@ -65,98 +78,119 @@ function EditOrder() {
                 <div className="formw">
                     <h1>View Order</h1>
                     <br/>
-                    <form onSubmit={handleSubmit}>
+                    <form ref={form} onSubmit={handleSubmit} className="form1">
 
-                        <label for="supplier"><b>Supplier</b></label>
+                        <label for="supplier"><b>Supplier :</b></label>
                         <input type="text"
                             className="form-control mb-2"
                             name="supplier"
                             disabled = "disabled"
                             value={supplier}
                             onChange={(e) => setSupplier(e.target.value)}
-                        /><br/><br/>
+                        /><br/>
 
-                        <label htmlFor="reqDate"><b>reqDate Number</b></label>
+                        <label htmlFor="reqDate"><b>Require Date :</b></label>
                         <input type="text"
                             className="form-control mb-3"
                             name="reqDate"
                             disabled = "disabled"
                             value={reqDate}
                             onChange={(e) => setReqDate(e.target.value)}
-                             /><br/><br/>
+                             /><br/>
 
-                        <label htmlFor="stAddress"><b>Street Address</b></label>
-                        <input type="stAddress"
+                        <label htmlFor="stAddress"><b>Street Address :</b></label>
+                        <input type="text"
                             className="form-control mb-3"
                             name="stAddress"
                             disabled = "disabled"
                             value={stAddress}
                             onChange={(e) => setStAddress(e.target.value)}
-                             /><br/><br/>
+                             /><br/>
 
-<label htmlFor="city"><b>Street Address</b></label>
-                        <input type="city"
+<label htmlFor="city"><b>City :</b></label>
+                        <input type="text"
                             className="form-control mb-3"
                             name="city"
                             disabled = "disabled"
                             value={city}
                             onChange={(e) => setStAddress(e.target.value)}
-                             /><br/><br/>
+                             /><br/>
 
-<label htmlFor="province"><b>Street Address</b></label>
-                        <input type="province"
+<label htmlFor="province"><b>Province :</b></label>
+                        <input type="text"
                             className="form-control mb-3"
                             name="province"
                             disabled = "disabled"
                             value={province}
                             onChange={(e) => setProvince(e.target.value)}
-                             /><br/><br/>
+                             /><br/>
 
-<label htmlFor="zipCode"><b>Street Address</b></label>
-                        <input type="zipCode"
+<label htmlFor="zipCode"><b>Postal Code :</b></label>
+                        <input type="text"
                             className="form-control mb-3"
                             name="zipCode"
                             disabled = "disabled"
                             value={zipCode}
                             onChange={(e) => setZip(e.target.value)}
-                             /><br/><br/>
+                             /><br/>
 
-<label htmlFor="contact"><b>Street Address</b></label>
-                        <input type="contact"
+<label htmlFor="contact"><b>Mobile Number :</b></label>
+                        <input type="text"
                             className="form-control mb-3"
                             name="contact"
                             disabled = "disabled"
                             value={contact}
                             onChange={(e) => setContact(e.target.value)}
-                             /><br/><br/>
+                             /><br/>
 
                         
 
-                        <label htmlFor="email"><b>Email</b></label>
-                        <input type="email"
+                        <label htmlFor="email"><b>Email :</b></label>
+                        <input type="text"
                             className="form-control mb-3"
                             name="email"
                             disabled = "disabled"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                             /><br/><br/>
+                             /><br/>
 
-<label htmlFor="adInfo"><b>Street Address</b></label>
-                        <input type="adInfo"
+<label htmlFor="adInfo"><b>Additional Information :</b></label>
+                        <input type="text"
                             className="form-control mb-3"
                             name="adInfo"
                             disabled = "disabled"
                             value={adInfo}
                             onChange={(e) => setAdInfo(e.target.value)}
-                             /><br/><br/>
+                             /><br/>
 
-<label htmlFor="status"><b>Street Address</b></label>
-                        <input type="status"
+
+                <div className="formw mb-5">
+                <label htmlFor="adInfo"><b>Details of Requested Items :</b></label>
+                        <div >
+                            <table className="table1">
+                                <tr>
+                                    <th>Item Name</th>
+                                    <th>Quantity</th>
+                                
+                                </tr>
+                                {items && items.map((item, index) => (
+                                <tr>
+                                    <td>{item.iName}</td>
+                                    <td>{item.quantity}</td>
+                                    
+                                </tr>))} 
+                            </table>
+                        
+                         </div>
+                 </div>          
+
+<label htmlFor="status"><b>Status :</b></label>
+                        <input type="text"
                             className="form-control mb-3"
                             name="status"
                             value={status}
                             onChange={(e) => setStatus(e.target.value)}
-                             /><br/><br/>
+                             /><br/>
 
                         
 
