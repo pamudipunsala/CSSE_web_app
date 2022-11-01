@@ -11,3 +11,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.table{
+  position:relative;
+  background-color: white;
+  top:5px;
+    height: 400px;
+    padding: 0 10px 10px 10px;
+    overflow: scroll;
+}
+
+Table thead{
+  position:sticky;
+  top: 0px;
+  margin: 0 0 0 0;
+}

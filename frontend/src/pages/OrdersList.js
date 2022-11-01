@@ -1,100 +1,132 @@
+import React, {Component} from "react";
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import '../index.css';
 
+export default class OrderList extends Component {
 
-function OrdersList() {
-    const [orders, setOrders] = useState();
-    const [searchkey, setsearchkey] = useState('');
-
-    useEffect(() => {
-        axios.get('http://localhost:7000/order').then(res => {
-            setOrders(res.data)
-            console.log(res.data)
-        })
-    }, [])
-
-    const filterOrders = async (e) => {
-        console.log(searchkey)
-        const response = await axios.get(
-            'http://localhost:7000/order'
-        );
-        const filterOrders = response.data.filter((orders) =>
-            orders.supplier.toLowerCase().includes(searchkey)
-        );
-        if (filterOrders.length > 0) {
-            setOrders(filterOrders);
-        }
-        else {
-            alert("Search Not Found")
-        }
+    constructor(props){
+        super(props);
+    
+        this.state={
+            orders:[]
+        };
+    }
+    
+    componentDidMount(){
+        this.retrieveOrders();
+    }
+    
+    retrieveOrders(){
+        axios.get("http://localhost:7000/order").then(res => {
+            if (res.data.success) {
+                this.setState({
+                    orders:res.data.existingOrder
+                });
+                console.log(this.state.orders)
+            }
+        });
     }
 
-    return (
-        <div className="container">
-            <br />
-            <h1>All orders</h1>
-            <br />
-            <div >
-                <div className="row mb-2">
-                    <input type="text"
-                        className="form-control col-4 mt-1"
-                        onChange={(e) => { setsearchkey(e.target.value) }}
-                        placeholder="Search orders"
-                        style={{ width: "200px", borderRadius: "10px" }}
-                    />
+    onDelete = (id) => {
+        axios.delete(`http://localhost:7000/order/delete/${id}`).then((res) => {
+            alert("Delete Successfully");
+            this.retrieveOrders();
+        })
+    }
 
-                    <div className="col">
-                        <button className="btn btn-secondary mt-1"
-                            style={{ marginLeft: "1px" }}
-                            onClick={() => filterOrders(searchkey)}>Search
-                        </button>
+    filterData(orders, searchKey){
+        const result = orders.filter((orders) =>
+        orders.city.toLowerCase().includes(searchKey)||
+        orders.province.toLowerCase().includes(searchKey)||
+        orders.supplier.toLowerCase().includes(searchKey)||
+        orders.zipCode.toLowerCase().includes(searchKey)
+        )
+
+        this.setState({orders:result});
+    }
+
+    handleSearchArea = (e) => {
+        const searchKey = e.currentTarget.value;
+
+        axios.get("http://localhost:7000/order").then(res => {
+            if (res.data.success) {
+                this.filterData(res.data.existingOrder,searchKey)
+            }
+        });
+    }
+    
+        render(){
+            return (
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-8-mt-2 mb-2">
+                            <h2>All Orders</h2>
+                        </div>
+                        <div className="col-lg-3 mt-2 mb-2">
+                            <input 
+                            className="form-control"
+                            type="search"
+                            placeholder="Search"
+                            name="searchQuery"
+                            onChange={this.handleSearchArea}></input>
+                        </div>
                     </div>
-
-                    {/*<div className="col">
-                        <a href={"/adminallreply"}>
-                            <button className="btn btn-warning mt-1" ><i class="fas fa-eye" aria-hidden="true"></i> &nbsp;View Responded orders</button>
-                        </a>
-    </div>*/}
-
-                    <div className="col">
-                        <a href={"/#"}>
-                            <button className="btn btn-success mt-1" ><i class="fa fa-file" aria-hidden="true"></i> &nbsp;Generate Report</button>
-                        </a>
-                    </div>
+                    <table >
+                    <div className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Supplier</th>
+                                <th scope="col">Required Date</th>
+                                <th scope="col">Street Address</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Province</th>
+                                <th scope="col">Zip Code</th>
+                                <th scope="col">Contact</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Additional Info</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            
+                            {this.state.orders.map((order,index) => (
+                            <tr key={index}>
+                                    <th scope="row">{index+1}</th>
+                                    <td>{order.supplier}</td>
+                                    <td>{order.reqDate}</td>
+                                    <td>{order.stAddress}</td>
+                                    <td>{order.city}</td>
+                                    <td>{order.province}</td>
+                                    <td>{order.zipCode}</td>
+                                    <td>{order.contact}</td>
+                                    <td>{order.email}</td>
+                                    <td>{order.adInfo}</td>
+                                    <td>{order.status}</td>
+                                    <td>
+                                    <a href={`/editorders/${order._id}`} ><button className="btn btn-warning btn-sm"><i className="fas fa-edit"></i></button></a>
+                                    </td>
+                            </tr>
+                        ))}
+                            
+                        
+                        </tbody>
+                        </div>
+                    </table>
                 </div>
-            </div>
-            <br />
-            <table>
-                <thead>
-                    <tr>
-                        <th> Supplier </th>
-                        <th> Require Date </th>
-                        <th> Street Address </th>
-                        <th> City </th>
-                        <th> Province </th>
-                        <th> Zip Code </th>
-                        <th> Contact </th>
-                        <th> Email </th>
-                        <th> Additional Information </th>
-                    </tr>
-                </thead>
-                <tbody>
-                {orders && orders.map((order, index) => (
-                    <tr>
-                        <td>{order.supplier}</td>
-                        <td>{order.reqDate}</td>
-                        <td>{order.stAddress}</td>
-                        <td>{order.city}</td>
-                        <td>{order.province}</td>
-                        <td>{order.zipCode}</td>
-                        <td>{order.email}</td>
-                        <td>{order.adInfo}</td>
-                    </tr>
-                     ))}
-                </tbody>
-            </table>
-            </div>
-    )
-}
+            )
+        }
 
-export default OrdersList;
+    }
+
+
+
+
+
+
+
+
+
+
