@@ -4,6 +4,7 @@ import Header from './components/Header';
 
 import Home from './pages/Home';
 import OrderList from './pages/OrdersList';
+import EditOrder from './pages/EditOrder';
 
 function App(){
   return(
@@ -13,6 +14,7 @@ function App(){
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/orders' element={<OrderList/>}/>
+      <Route path='/editorders/:id' element={<EditOrder/>}/>
     </Routes>
   </Router>
   )};
