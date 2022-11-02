@@ -50,7 +50,7 @@ router.post("/suplogin",(req,res) => {
     })
 })
 
-//get users
+//get suppliers
 router.get('/suppliers',(req,res)=>{
     Suppliers.find().exec((err,suppliers) => {
         if(err){
@@ -81,7 +81,7 @@ router.get('/suppliers/:id',(req,res) => {
     });
 });
 
-//update users
+//update suppliers
 router.put('/suppliers/update/:id',(req,res)=>{
     Suppliers.findByIdAndUpdate(
         req.params.id,{
@@ -98,7 +98,7 @@ router.put('/suppliers/update/:id',(req,res)=>{
     );
 });
 
-//delete user
+//delete suppliers
 router.delete('/suppliers/delete/:id',(req,res)=>{
     Suppliers.findByIdAndRemove(req.params.id).exec((err,deleteSupplier)=>{
         if(err) return res.status(400).json({

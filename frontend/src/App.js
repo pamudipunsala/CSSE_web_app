@@ -8,6 +8,7 @@ import EditOrder from './pages/EditOrder';
 
 import Register from './pages/Register';
 import SupRegister from './pages/SupRegister';
+import ViewSuppliers from './pages/ViewSuppliers';
 
 function App(){
   return(
@@ -21,6 +22,7 @@ function App(){
 
       <Route path='/register' element={<Register/>}/>
       <Route path='/supregister' element={<SupRegister/>}/>
+      <Route path='/suppliers' element={<ViewSuppliers/>} />
     </Routes>
   </Router>
   )};
