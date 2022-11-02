@@ -10,6 +10,7 @@ const orderRoutes=require('./routes/orders');
 const userRoutes = require('./routes/users');
 const supplierRoutes = require('./routes/suppliers');
 const paymentRoutes = require('./routes/payments');
+const deliveryRoutes = require('./routes/deliveries');
 
 //middleware
 app.use(bodyParser.json());
@@ -20,6 +21,7 @@ app.use(orderRoutes);
 app.use(userRoutes);
 app.use(supplierRoutes);
 app.use(paymentRoutes);
+app.use(deliveryRoutes);
 
 
 

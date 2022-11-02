@@ -11,6 +11,8 @@ import SupRegister from './pages/SupRegister';
 import ViewSuppliers from './pages/ViewSuppliers';
 import EditSupplier from './pages/EditSupplier';
 
+import MakeDeliveries from './pages/MakeDeliveries';
+
 import MakePayments from './pages/MakePayments';
 import ViewPayments from './pages/ViewPayments';
 import EditPayments from './pages/EditPayments';
@@ -29,6 +31,8 @@ function App(){
       <Route path='/supregister' element={<SupRegister/>}/>
       <Route path='/suppliers' element={<ViewSuppliers/>} />
       <Route path='/editSuppliers/:id' element={<EditSupplier/>}/>
+
+      <Route path='/makedelivery' element={<MakeDeliveries/>}/>
 
       <Route path='/makepayment' element={<MakePayments/>}/>
       <Route path='/viewpayment' element={<ViewPayments/>}/>
