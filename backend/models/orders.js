@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
+    steMan:{
+        type:String,
+        
+    },
     companyName:{
         type:String,
         required:true
@@ -10,7 +14,7 @@ const orderSchema = new mongoose.Schema({
         required:true
     },
     reqDate:{
-        type:Date,
+        type:String,
         required:true
     },
     stAddress:{

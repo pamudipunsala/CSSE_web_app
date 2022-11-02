@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom';
 import emailjs from '@emailjs/browser';
+import '../index.css'
 
 function EditOrder() {
     const { id } = useParams();
@@ -74,133 +75,179 @@ function EditOrder() {
 
     return (
 
-        <div>
+        <div style={{backgroundColor:"#d1d1d1",margin:"5px"}}>
             <br />
             <div className="one">
                 <div className="formw">
-                    <h1>View Order</h1>
+                    <div className="ordersHeader1">
+                    <h1><i className='fa-solid fa-clock' ></i>Pending Approval</h1>
+                    </div>
+                    
                     <br/>
-                    <form ref={form} onSubmit={handleSubmit} className="form1">
+                    <form ref={form} onSubmit={handleSubmit} className="form1" >
+                        <div style={{backgroundColor:"white", padding:"20px",borderRadius:"10px"}}>
+                        <table>
+                            <tr>
+                                <th><b>Supplier :</b></th>
+                                <td>
+                                    <input type="text"
+                                        className="form-control mb-2"
+                                        name="supplier"
+                                        disabled = "disabled"
+                                        value={supplier}
+                                        onChange={(e) => setSupplier(e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><b>Require Date :</b></th>
+                                <td>
+                                <input type="text"
+                                    className="form-control mb-3"
+                                    name="reqDate"
+                                    //disabled = "disabled"
+                                    value={reqDate}
+                                    onChange={(e) => setReqDate(e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><b>Street Address :</b></th>
+                                <td>
+                                <input type="text"
+                                    className="form-control mb-3"
+                                    name="stAddress"
+                                    disabled = "disabled"
+                                    value={stAddress}
+                                    onChange={(e) => setStAddress(e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><b>City :</b></th>
+                                <td>
+                                <input type="text"
+                                    className="form-control mb-3"
+                                    name="city"
+                                    disabled = "disabled"
+                                    value={city}
+                                    onChange={(e) => setStAddress(e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><b>Province :</b></th>
+                                <td>
+                                <input type="text"
+                                    className="form-control mb-3"
+                                    name="province"
+                                    disabled = "disabled"
+                                    value={province}
+                                    onChange={(e) => setProvince(e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><b>Postal Code :</b></th>
+                                <td>
+                                <input type="text"
+                                    className="form-control mb-3"
+                                    name="zipCode"
+                                    disabled = "disabled"
+                                    value={zipCode}
+                                    onChange={(e) => setZip(e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><b>Mobile Number :</b></th>
+                                <td>
+                                <input type="text"
+                                    className="form-control mb-3"
+                                    name="contact"
+                                    disabled = "disabled"
+                                    value={contact}
+                                    onChange={(e) => setContact(e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><b>Email :</b></th>
+                                <td>
+                                <input type="text"
+                                    className="form-control mb-3"
+                                    name="email"
+                                    disabled = "disabled"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><b>Additional Information :</b></th>
+                                <td>
+                                <input type="text"
+                                    className="form-control mb-3"
+                                    name="adInfo"
+                                    disabled = "disabled"
+                                    value={adInfo}
+                                    onChange={(e) => setAdInfo(e.target.value)}
+                                    />
+                                </td>
+                            </tr>
+                            <tr>
+                                <th><b>Status :</b></th>
+                                <td>
+                                {/*<input type="text"
+                                    className="form-control mb-3"
+                                    name="status"
+                                    value={status}
+                                    onChange={(e) => setStatus(e.target.value)}
+    />*/}
+                                    <select name="status" id="status">
+                                        <option value={status === 'accepted'} onChange={(e) => setStatus(e.target.value)}>accepted</option>
+                                        <option value={status === 'rejected'} onChange={(e) => setStatus(e.target.value)}>rejected</option>
+                                        
+                                    </select>
 
-                        <label for="supplier"><b>Supplier :</b></label>
-                        <input type="text"
-                            className="form-control mb-2"
-                            name="supplier"
-                            disabled = "disabled"
-                            value={supplier}
-                            onChange={(e) => setSupplier(e.target.value)}
-                        /><br/>
-
-                        <label htmlFor="reqDate"><b>Require Date :</b></label>
-                        <input type="text"
-                            className="form-control mb-3"
-                            name="reqDate"
-                            disabled = "disabled"
-                            value={reqDate}
-                            onChange={(e) => setReqDate(e.target.value)}
-                             /><br/>
-
-                        <label htmlFor="stAddress"><b>Street Address :</b></label>
-                        <input type="text"
-                            className="form-control mb-3"
-                            name="stAddress"
-                            disabled = "disabled"
-                            value={stAddress}
-                            onChange={(e) => setStAddress(e.target.value)}
-                             /><br/>
-
-<label htmlFor="city"><b>City :</b></label>
-                        <input type="text"
-                            className="form-control mb-3"
-                            name="city"
-                            disabled = "disabled"
-                            value={city}
-                            onChange={(e) => setStAddress(e.target.value)}
-                             /><br/>
-
-<label htmlFor="province"><b>Province :</b></label>
-                        <input type="text"
-                            className="form-control mb-3"
-                            name="province"
-                            disabled = "disabled"
-                            value={province}
-                            onChange={(e) => setProvince(e.target.value)}
-                             /><br/>
-
-<label htmlFor="zipCode"><b>Postal Code :</b></label>
-                        <input type="text"
-                            className="form-control mb-3"
-                            name="zipCode"
-                            disabled = "disabled"
-                            value={zipCode}
-                            onChange={(e) => setZip(e.target.value)}
-                             /><br/>
-
-<label htmlFor="contact"><b>Mobile Number :</b></label>
-                        <input type="text"
-                            className="form-control mb-3"
-                            name="contact"
-                            disabled = "disabled"
-                            value={contact}
-                            onChange={(e) => setContact(e.target.value)}
-                             /><br/>
+                                </td>
+                            </tr>
+                        </table>
+                        </div>
+                       
+                    
 
                         
-
-                        <label htmlFor="email"><b>Email :</b></label>
-                        <input type="text"
-                            className="form-control mb-3"
-                            name="email"
-                            disabled = "disabled"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                             /><br/>
-
-<label htmlFor="adInfo"><b>Additional Information :</b></label>
-                        <input type="text"
-                            className="form-control mb-3"
-                            name="adInfo"
-                            disabled = "disabled"
-                            value={adInfo}
-                            onChange={(e) => setAdInfo(e.target.value)}
-                             /><br/>
+                        
 
 
-                <div className="formw mb-5">
+
+                <div className="itemdet">
                 <label htmlFor="adInfo"><b>Details of Requested Items :</b></label>
                         <div >
-                            <table className="table1">
-                                <tr>
-                                    <th>Item Name</th>
-                                    <th>Quantity</th>
-                                    <th>Price</th>
+                            <table className="table1" >
+                                <tr className='tritem'>
+                                    <th style={{padding:"50px"}}>Item Name</th>
+                                    <th style={{padding:"50px"}}>Quantity</th>
+                                    <th style={{padding:"50px"}}>Price</th>
                                 </tr>
                                 {items && items.map((item, index) => (
-                                <tr>
-                                    <td>{item.iName}</td>
-                                    <td>{item.quantity}</td>
-                                    <td>{item.quantity*item.unitPrice}</td>
+                                <tr className='tritem'> 
+                                    <td style={{padding:"50px"}}>{item.iName}</td>
+                                    <td style={{padding:"50px"}}>{item.quantity}</td>
+                                    <td style={{padding:"50px"}}>{item.quantity*item.unitPrice}</td>
                                 </tr>
                                 ))} 
                                 <hr/>
                                 <tr>
-                                <td><b>Total Price : </b></td>
-                                <td></td>
-                                <td><b>{total}</b></td>
+                                <td style={{padding:"50px"}}><b>Total Price : </b></td>
+                                <td style={{padding:"50px"}}></td>
+                                <td style={{padding:"50px"}}><b>{total}</b></td>
                                 </tr>
                             </table>
                         
                          </div>
-                 </div>          
-
-<label htmlFor="status"><b>Status :</b></label>
-                        <input type="text"
-                            className="form-control mb-3"
-                            name="status"
-                            value={status}
-                            onChange={(e) => setStatus(e.target.value)}
-                             /><br/>
-
+                 </div>       
                         
 
                         <button type="submit" className="btn btn-warning"><i className="fas fa-edit"></i>&nbsp; Update </button>

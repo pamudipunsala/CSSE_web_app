@@ -21,11 +21,7 @@ code {
     overflow: scroll;
 }
 
-.table1{
-  position:relative;
-  background-color: white;
-  border: 1;
-}
+
 
 Table thead{
   position:sticky;
@@ -563,4 +559,35 @@ input[type="search"]{
   padding: 10px;
   margin: 60px;
   width: 300px;
+}
+
+.ordersHeader{
+  text-align: center;
+  margin-top: 50px;
+}
+
+.ordersHeader1{
+  text-align: center;
+  margin-top: 10px;
+ 
+}
+
+.itemdet{
+  position:absolute;
+  margin-top: -500px;
+  margin-left: 800px;
+  background-color: white;
+  padding: 50px;
+  border-radius: 10px;
+}
+
+.tritem:nth-child(even){background-color: #f2f2f2;}
+
+.table1{
+  position:relative;
+  background-color: white;
+  border: 1;
+  padding:0 10px 10px 10px;
+  text-align: left;
+  
 }

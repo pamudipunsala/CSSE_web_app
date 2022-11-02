@@ -59,34 +59,21 @@ export default class OrderList extends Component {
             return (
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-8-mt-2 mb-2">
+                        <div className="ordersHeader">
                             <h2>All Orders</h2>
                         </div>
-                        <div className="col-lg-3 mt-2 mb-2">
-                            <input 
-                            className="form-control"
-                            type="search"
-                            placeholder="Search"
-                            name="searchQuery"
-                            onChange={this.handleSearchArea}></input>
-                        </div>
+                        
                     </div>
                     <table >
                     <div className="table">
                         <thead>
                             <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Supplier</th>
+                                <th scope="col">Order ref.</th>
+                                <th scope="col">Site Manager</th>
+                                <th scope="col">Site Location</th>
                                 <th scope="col">Required Date</th>
-                                <th scope="col">Street Address</th>
-                                <th scope="col">City</th>
-                                <th scope="col">Province</th>
-                                <th scope="col">Zip Code</th>
-                                <th scope="col">Contact</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Additional Info</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Action</th>
+            
                             </tr>
                         </thead>
                         
@@ -94,20 +81,12 @@ export default class OrderList extends Component {
                             
                             {this.state.orders.map((order,index) => (
                             <tr key={index}>
-                                    <th scope="row">{index+1}</th>
-                                    <td>{order.supplier}</td>
-                                    <td>{order.reqDate}</td>
-                                    <td>{order.stAddress}</td>
+                                    <th scope="row"><a href={`/editorders/${order._id}`} >GJQ{index+20045301}</a></th>
+                                    <td>{order.steMan}</td>
                                     <td>{order.city}</td>
-                                    <td>{order.province}</td>
-                                    <td>{order.zipCode}</td>
-                                    <td>{order.contact}</td>
-                                    <td>{order.email}</td>
-                                    <td>{order.adInfo}</td>
+                                    <td>{order.reqDate}</td>
                                     <td>{order.status}</td>
-                                    <td>
-                                    <a href={`/editorders/${order._id}`} ><button className="btn btn-warning btn-sm"><i className="fas fa-edit"></i></button></a>
-                                    </td>
+                                    
                             </tr>
                         ))}
                             
