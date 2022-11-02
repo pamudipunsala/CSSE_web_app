@@ -9,6 +9,7 @@ import EditOrder from './pages/EditOrder';
 import Register from './pages/Register';
 import SupRegister from './pages/SupRegister';
 import ViewSuppliers from './pages/ViewSuppliers';
+import EditSupplier from './pages/EditSupplier';
 
 function App(){
   return(
@@ -23,6 +24,7 @@ function App(){
       <Route path='/register' element={<Register/>}/>
       <Route path='/supregister' element={<SupRegister/>}/>
       <Route path='/suppliers' element={<ViewSuppliers/>} />
+      <Route path='/editSuppliers/:id' element={<EditSupplier/>}/>
     </Routes>
   </Router>
   )};
