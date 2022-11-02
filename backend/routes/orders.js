@@ -68,6 +68,8 @@ router.put('/order/update/:id',(req,res) => {
     );
 });
 
+
+
 //delete payment 
 router.delete('/order/delete/:id',(req,res) => {
     Order.findByIdAndRemove(req.params.id).exec((err,deleteOrder) => {
