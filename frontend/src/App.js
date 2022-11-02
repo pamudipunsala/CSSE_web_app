@@ -10,6 +10,8 @@ import Register from './pages/Register';
 import SupRegister from './pages/SupRegister';
 import ViewSuppliers from './pages/ViewSuppliers';
 
+import MakePayments from './pages/MakePayments';
+
 function App(){
   return(
   <Router>
@@ -23,6 +25,8 @@ function App(){
       <Route path='/register' element={<Register/>}/>
       <Route path='/supregister' element={<SupRegister/>}/>
       <Route path='/suppliers' element={<ViewSuppliers/>} />
+
+      <Route path='/makepayment' element={<MakePayments/>}/>
     </Routes>
   </Router>
   )};
