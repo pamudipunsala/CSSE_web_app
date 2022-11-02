@@ -12,6 +12,7 @@ import ViewSuppliers from './pages/ViewSuppliers';
 import EditSupplier from './pages/EditSupplier';
 
 import MakeDeliveries from './pages/MakeDeliveries';
+import ViewDeliveries from './pages/ViewDeliveries';
 
 import MakePayments from './pages/MakePayments';
 import ViewPayments from './pages/ViewPayments';
@@ -33,6 +34,7 @@ function App(){
       <Route path='/editSuppliers/:id' element={<EditSupplier/>}/>
 
       <Route path='/makedelivery' element={<MakeDeliveries/>}/>
+      <Route path='/viewdelivery' element={<ViewDeliveries/>}/>
 
       <Route path='/makepayment' element={<MakePayments/>}/>
       <Route path='/viewpayment' element={<ViewPayments/>}/>

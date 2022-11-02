@@ -129,7 +129,7 @@ export default class MakeDeliveries extends Component{
         return (
             <div className="addpayment">
                 <div className="ish">
-                <button className="abtn" type="button"><a href="#" style={{textDecoration:'none',color:'white'}} required><b>View Deliveries</b></a></button>
+                <button className="abtn" type="button"><a href="/viewdelivery" style={{textDecoration:'none',color:'white'}} required><b>View Deliveries</b></a></button>
                 <div className="new"> 
                 <form style={{margin: "auto", padding: "15px", maxWidth: "400px", alignContent: "center", backgroundColor: "rgba(0, 0, 0, 0.560)", color:'white'}}>
                     <div >
