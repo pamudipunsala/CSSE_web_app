@@ -7,6 +7,7 @@ import OrderList from './pages/OrdersList';
 import EditOrder from './pages/EditOrder';
 
 import Register from './pages/Register';
+import SupRegister from './pages/SupRegister';
 
 function App(){
   return(
@@ -19,6 +20,7 @@ function App(){
       <Route path='/editorders/:id' element={<EditOrder/>}/>
 
       <Route path='/register' element={<Register/>}/>
+      <Route path='/supregister' element={<SupRegister/>}/>
     </Routes>
   </Router>
   )};

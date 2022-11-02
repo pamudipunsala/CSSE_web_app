@@ -8,6 +8,7 @@ const cors = require('cors');
 //import routes
 const orderRoutes=require('./routes/orders');
 const userRoutes = require('./routes/users');
+const supplierRoutes = require('./routes/suppliers');
 
 //middleware
 app.use(bodyParser.json());
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use(orderRoutes);
 app.use(userRoutes);
+app.use(supplierRoutes);
 
 
 
