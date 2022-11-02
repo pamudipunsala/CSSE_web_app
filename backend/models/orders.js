@@ -1,6 +1,10 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
+    companyName:{
+        type:String,
+        required:true
+    },
     supplier:{
         type:String,
         required:true
@@ -45,8 +49,14 @@ const orderSchema = new mongoose.Schema({
         quantity:{
             type:Number,
             required:true
-        }
+        },
+        unitPrice:{
+            type:Number
+        },
     }],
+    TotalPrice:{
+        type:Number
+    },
     status:{
         type:String,
         required:true
