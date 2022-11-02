@@ -172,10 +172,10 @@ export default class MakePayments extends Component{
 
                     <div>
                         <label name="date"><b>Date</b></label><br/>
-                        <input type="text" 
+                        <input type="date" 
+                            min="2018-01-01" max="2030-12-31" 
                             name='date' 
                             id='date' 
-                            placeholder="Eg:11/01/2022" 
                             value={this.state.date} 
                             onChange={this.InputChange}/>
                     </div>
