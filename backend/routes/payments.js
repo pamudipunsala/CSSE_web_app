@@ -22,7 +22,7 @@ router.post('/payment/add', (req,res) =>{
 
 //get payments
 router.get('/payments',(req,res)=>{
-    Payments.find().exec((err,payment) => {
+    Payments.find().exec((err,payments) => {
         if(err){
             return res.status(400).json({
                 error:err
@@ -30,7 +30,7 @@ router.get('/payments',(req,res)=>{
         }
         return res.status(200).json({
             success:true,
-            existingPayment:payment
+            existingPayment:payments
         });
     });
 });

@@ -12,7 +12,6 @@ import ViewSuppliers from './pages/ViewSuppliers';
 import EditSupplier from './pages/EditSupplier';
 
 import MakePayments from './pages/MakePayments';
-import ViewPayments from './pages/ViewPayments';
 
 function App(){
   return(
@@ -30,7 +29,6 @@ function App(){
       <Route path='/editSuppliers/:id' element={<EditSupplier/>}/>
 
       <Route path='/makepayment' element={<MakePayments/>}/>
-      <Route path='/viewpayments' element={<ViewPayments/>}/>
     </Routes>
   </Router>
   )};
