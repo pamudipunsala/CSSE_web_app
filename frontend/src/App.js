@@ -6,6 +6,8 @@ import Home from './pages/Home';
 import OrderList from './pages/OrdersList';
 import EditOrder from './pages/EditOrder';
 
+import Register from './pages/Register';
+
 function App(){
   return(
   <Router>
@@ -15,6 +17,8 @@ function App(){
       <Route path='/' element={<Home/>}/>
       <Route path='/orders' element={<OrderList/>}/>
       <Route path='/editorders/:id' element={<EditOrder/>}/>
+
+      <Route path='/register' element={<Register/>}/>
     </Routes>
   </Router>
   )};
