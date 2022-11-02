@@ -1,0 +1,249 @@
+import axios from 'axios';
+import React, {Component} from 'react';
+import '../index.css';
+
+class ViewPayments extends Component{
+    constructor(props){
+        super(props)
+        this.state = {
+            payments:[]
+        };
+    }
+
+    componentDidMount(){
+        this.displayPayment();
+    }
+
+    displayPayment(){
+        axios.get("http://localhost:7000/payments").then((res) => {
+            if(res.data.success){
+                this.setState({
+                    payments:res.data.existingPayment
+                });
+                console.log(this.state.payments);
+            }
+        });
+    }
+
+
+    OnDelete = (id) => {
+        axios.delete(`http://localhost:7000/payment/delete/${id}`).then((res) => {
+            alert("Delete Successfully");
+            this.displayPayment();
+        })
+    }
+    filterData(payments,searchKey){
+        const result = payments.filter((payments)=>
+        payments.orderid.includes(searchKey)||
+        payments.supplierid.includes(searchKey)||
+        payments.sname.includes(searchKey)||
+        payments.accid.includes(searchKey)||
+        payments.date.includes(searchKey)||
+        payments.amount.includes(searchKey)
+        )
+        this.setState({payments:result})
+      }
+    
+      
+
+    handleSearchArea= (e)=>{
+        const searchKey =e.currentTarget.value;
+        axios.get("http://localhost:7000/payments").then(res=>{
+          if(res.data.success){
+            this.filterData(res.data.existingPayment,searchKey)
+      }
+      });
+    }
+    
+    render(){
+        return(
+            
+                <div className="viewpayments" >
+                <div className="ish">
+                <div style={{textAlign:"center", paddingTop:"50px"}}>
+                <h2>Payment History</h2>                        
+                <div>
+                <input className="search" type="search" placeholder="Search" name="searchQuery" onChange={this.handleSearchArea}>
+            </input><br/><br/>
+                <table className="table" style={{margin: "auto", padding: "15px", maxWidth: "1000px", alignContent: "center", color: "white"}}>
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">Supplier ID</th>
+                            <th scope="col">Supplier Name</th>
+                            <th scope="col">Accountant ID</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col"></th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.state.payments.map((payment,index) => (
+                            <tr key={index}>
+                                <th scope="row">{index+1}</th>
+                                <td>{payment.orderid}</td>
+                                <td>{payment.supplierid}</td>
+                                <td>{payment.sname}</td>
+                                <td>{payment.accid}</td>
+                                <td>{payment.date}</td>
+                                <td>{payment.amount}</td>
+                                {/* <td>
+                                    
+                                <a className="edit" href={`/${payments._id}`}><b>
+                                        <i className="fas fa-edit"></i>Edit</b>
+                                        </a>
+                                    </td> */}
+                                    <td>
+                                <a className="edit" href={`#/${payment._id}`}><b>
+                                        <i className="fas fa-edit"></i>Edit</b>
+                                        </a>
+                                    </td>
+                                    <td>
+                                    <a className="delete" href="#" onClick={()=>this.OnDelete(payment._id)}><b>
+                                        <i className="fas fa-trash-alt"></i>Delete</b>
+                                    </a>
+                                </td>                            
+                            </tr>
+                        ))}
+                    </tbody>
+                </table><br/><br/>
+                <button className="sbtn1" type="button" ><a href="/addteam" style={{textDecoration:'none',color:'white'}}><b>Add new</b></a></button><br/>
+                <br/><br/></div>
+            </div>
+            </div>
+            </div>
+        ); 
+    }
+}
+export default ViewPayments;
+
+
+
+
+/*import React, {Component} from "react";
+import axios from 'axios';
+import '../index.css';
+
+export default class ViewPayments extends Component {
+
+    constructor(props){
+        super(props);
+    
+        this.state={
+            payments:[]
+        };
+    }
+    
+    componentDidMount(){
+        this.retrievePayments();
+    }
+    
+    retrievePayments(){
+        axios.get("http://localhost:7000/payments").then(res => {
+            if (res.data.success) {
+                this.setState({
+                    payments:res.data.existingPayment
+                });
+                console.log(this.state.payments)
+            }
+        });
+    }
+
+    onDelete = (id) => {
+        axios.delete(`http://localhost:7000/payment/delete/${id}`).then((res) => {
+            alert("Delete Successfully");
+            this.retrievePayments();
+        })
+    }
+
+    filterData(payments, searchKey){
+        const result = payments.filter((payments) =>
+        payments.orderid.toLowerCase().includes(searchKey)||
+        payments.supplierid.toLowerCase().includes(searchKey)||
+        payments.sname.toLowerCase().includes(searchKey)||
+        payments.accid.toLowerCase().includes(searchKey)||
+        payments.date.toLowerCase().includes(searchKey)||
+        payments.amount.toLowerCase().includes(searchKey)
+        )
+
+        this.setState({payments:result});
+    }
+
+    handleSearchArea = (e) => {
+        const searchKey = e.currentTarget.value;
+
+        axios.get("http://localhost:7000/payments").then(res => {
+            if (res.data.success) {
+                this.filterData(res.data.existingPayment,searchKey)
+            }
+        });
+    }
+    
+        render(){
+            return (
+                <div className="container">
+                    <div className="row">
+                        <div className="col-lg-8-mt-2 mb-2">
+                            <h2>Payment History</h2>
+                        </div>
+                        <div className="col-lg-3 mt-2 mb-2">
+                            <input 
+                            className="form-control"
+                            type="search"
+                            placeholder="Search"
+                            name="searchQuery"
+                            onChange={this.handleSearchArea}></input>
+                        </div>
+                    </div>
+                    <table >
+                    <div className="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Order ID</th>
+                                <th scope="col">Supplier ID</th>
+                                <th scope="col">Supplier Name</th>
+                                <th scope="col">Accountant ID</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Amount</th>
+                            </tr>
+                        </thead>
+                        
+                        <tbody>
+                            
+                            {this.state.payments.map((payment,index) => (
+                            <tr key={index}>
+                                    <th scope="row">{index+1}</th>
+                                    <td>{payment.orderid}</td>
+                                    <td>{payment.supplierid}</td>
+                                    <td>{payment.sname}</td>
+                                    <td>{payment.accid}</td>
+                                    <td>{payment.date}</td>
+                                    <td>{payment.amount}</td>
+                                    <td>
+                                    <a href={`/editpayments/${payment._id}`} ><button className="btn btn-warning btn-sm"><i className="fas fa-edit"></i></button></a>
+                                    </td>
+                            </tr>
+                        ))}
+                            
+                        
+                        </tbody>
+                        </div>
+                    </table>
+                </div>
+            )
+        }
+
+    }
+
+*/
+
+
+
+
+
+
+
+
