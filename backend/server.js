@@ -9,6 +9,7 @@ const cors = require('cors');
 const orderRoutes=require('./routes/orders');
 const userRoutes = require('./routes/users');
 const supplierRoutes = require('./routes/suppliers');
+const paymentRoutes = require('./routes/payments');
 
 //middleware
 app.use(bodyParser.json());
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(orderRoutes);
 app.use(userRoutes);
 app.use(supplierRoutes);
+app.use(paymentRoutes);
 
 
 
