@@ -18,7 +18,7 @@ function EditOrder() {
     const [adInfo, setAdInfo] = useState('');
     const [items, setItems] = useState(['']);
     const [status, setStatus] = useState('');
-
+    const [total, setTotal] = useState('');
 
     useEffect(() => {
         axios.get(`http://localhost:7000/order/${id}`).then((res) => {
@@ -36,6 +36,7 @@ function EditOrder() {
             setAdInfo(orderDetail.adInfo)
             setItems(orderDetail.items)
             setStatus(orderDetail.status)
+            setTotal(orderDetail.TotalPrice)
         })
 
     }, []);
@@ -54,7 +55,8 @@ function EditOrder() {
             email,
             adInfo,
             items,
-            status
+            status,
+            total
             
         }
         axios.put(`http://localhost:7000/order/update/${id}`, orderlist)
@@ -171,14 +173,21 @@ function EditOrder() {
                                 <tr>
                                     <th>Item Name</th>
                                     <th>Quantity</th>
-                                
+                                    <th>Price</th>
                                 </tr>
                                 {items && items.map((item, index) => (
                                 <tr>
                                     <td>{item.iName}</td>
                                     <td>{item.quantity}</td>
-                                    
-                                </tr>))} 
+                                    <td>{item.quantity*item.unitPrice}</td>
+                                </tr>
+                                ))} 
+                                <hr/>
+                                <tr>
+                                <td><b>Total Price : </b></td>
+                                <td></td>
+                                <td><b>{total}</b></td>
+                                </tr>
                             </table>
                         
                          </div>
