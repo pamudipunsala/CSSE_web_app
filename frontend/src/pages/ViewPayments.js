@@ -1,6 +1,9 @@
 import React, {Component} from "react";
 import axios from 'axios';
 import '../index.css';
+import { toast } from 'react-toastify';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 export default class ViewPayments extends Component {
 
@@ -28,10 +31,30 @@ export default class ViewPayments extends Component {
     }
 
     onDelete = (id) => {
-        axios.delete(`http://localhost:7000/payment/delete/${id}`).then((res) => {
-            alert("Delete Successfully");
-            this.retrievePayments();
-        })
+        confirmAlert({
+            title: 'Delete Payment',
+            message: `Are you sure you want to delete payment details?`,
+            buttons: [
+              {
+                label: 'Cancel',
+              },
+              {
+                label: 'Delete',
+                onClick: () => {
+                    axios.delete(`http://localhost:7000/payment/delete/${id}`).then((res) => {
+                        alert("Delete Successfully");
+                        this.retrievePayments();
+                    })
+                  .then(() => {
+                    toast.success(`Record deleted.`);
+                  })
+                  .catch(err => {
+                    toast.error(`Failed to delete record: ${err.message}`);
+                  });
+                }
+              }      
+            ]
+          });
     }
 
     filterData(payments, searchKey){
@@ -78,6 +101,7 @@ export default class ViewPayments extends Component {
                         <thead>
                             <tr>
                                 <th scope="col">#</th>
+                                <th scope="col">Payment ID</th>
                                 <th scope="col">Order ID</th>
                                 <th scope="col">Supplier ID</th>
                                 <th scope="col">Supplier Name</th>
@@ -92,6 +116,7 @@ export default class ViewPayments extends Component {
                             {this.state.payments.map((payments,index) => (
                             <tr key={index}>
                                     <th scope="row">{index+1}</th>
+                                    <td>{payments._id}</td>
                                     <td>{payments.orderid}</td>
                                     <td>{payments.supplierid}</td>
                                     <td>{payments.sname}</td>
