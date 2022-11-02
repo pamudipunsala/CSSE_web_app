@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const paymentSchema = new mongoose.Schema({
     orderid:{
         type:String,
+        unique: true,
         required:true
     },
     supplierid:{

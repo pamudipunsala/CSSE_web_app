@@ -10,7 +10,7 @@ router.post('/payment/add', (req,res) =>{
     newPayment.save((err) => {
         if(err){
             return res.status(400).json({
-                error:err
+                message:"Insert unsuccessful",err
             });
         }
         return res.status(200).json({

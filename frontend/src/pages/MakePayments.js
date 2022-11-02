@@ -120,9 +120,9 @@ export default class MakePayments extends Component{
         return (
             <div className="addpayment">
                 <div className="ish">
-                <button className="abtn" type="button"><a href="/viewpayments" style={{textDecoration:'none',color:'white'}} required><b>View Teams</b></a></button>
+                <button className="abtn" type="button"><a href="/viewpayment" style={{textDecoration:'none',color:'white'}} required><b>View Records</b></a></button>
                 <div className="new"> 
-                <form style={{margin: "auto", padding: "15px", maxWidth: "400px", alignContent: "center", backgroundColor: "rgba(0, 0, 0, 0.560)", color:'white'}}>
+                <form style={{margin: "auto", padding: "0px 15px 15px ", maxWidth: "400px", alignContent: "center", backgroundColor: "rgba(0, 0, 0, 0.560)", color:'white'}}>
                     <div >
                     <h2>Add Payment Details</h2>
 
@@ -192,7 +192,7 @@ export default class MakePayments extends Component{
                     </div>
                     <div style={{color: "red"}}><b>{this.state.amountError}</b></div>
 
-                    <br/><br/><br/>
+                    <br/>
                     <button className="sbtn" type="submit" onClick={this.onSubmit} ><a href="#" style={{textDecoration:'none',color:'white'}}><b>Save</b></a></button><br/>
                     </div>
                 </form> 

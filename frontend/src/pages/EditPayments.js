@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState, useRef } from 'react'
 import { useParams } from 'react-router-dom';
-import emailjs from '@emailjs/browser';
+import '../index.css';
+
 
 function EditPayments() {
     const { id } = useParams();
@@ -56,8 +57,8 @@ function EditPayments() {
 
         <div>
             <br />
-            <div className="one">
-                <div className="formw">
+            <div className="editpayment">
+                <div className="container">
                     <h1>Payment</h1>
                     <br/>
                     <form ref={form} onSubmit={handleSubmit} className="form1">

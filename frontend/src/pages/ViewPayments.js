@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import axios from 'axios';
 import '../index.css';
 import { toast } from 'react-toastify';
-import { confirmAlert } from 'react-confirm-alert'; // Import
+import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 export default class ViewPayments extends Component {
@@ -59,14 +59,14 @@ export default class ViewPayments extends Component {
 
     filterData(payments, searchKey){
         const result = payments.filter((payments) =>
-        payments.orderid.includes(searchKey)||
-        payments.supplierid.includes(searchKey)||
-        payments.sname.includes(searchKey)||
-        payments.accid.includes(searchKey)||
-        payments.date.includes(searchKey)||
-        payments.amount.includes(searchKey)
+        payments.orderid.toLowerCase().includes(searchKey)||
+        payments.supplierid.toLowerCase().includes(searchKey)||
+        payments.sname.toLowerCase().includes(searchKey)||
+        payments.accid.toLowerCase().includes(searchKey)||
+        payments.date.toLowerCase().includes(searchKey)||
+        payments.amount.toLowerCase().includes(searchKey)
         )
-
+        
         this.setState({payments:result});
     }
 
@@ -83,7 +83,7 @@ export default class ViewPayments extends Component {
         render(){
             return (
                 <div className="container">
-                    <div className="row">
+                    <div className="viewpayment">
                         <div className="col-lg-8-mt-2 mb-2">
                             <h2>Payments History</h2>
                         </div>
@@ -138,6 +138,7 @@ export default class ViewPayments extends Component {
                         </tbody>
                         </div>
                     </table>
+                    <button className="abtn" type="button"><a href="/makepayment" style={{textDecoration:'none',color:'white'}} required><b>Add Payment</b></a></button>
                 </div>
             )
         }
