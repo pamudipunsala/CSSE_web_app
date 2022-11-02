@@ -13,6 +13,7 @@ import EditSupplier from './pages/EditSupplier';
 
 import MakeDeliveries from './pages/MakeDeliveries';
 import ViewDeliveries from './pages/ViewDeliveries';
+import EditDeliveries from './pages/EditDeliveries';
 
 import MakePayments from './pages/MakePayments';
 import ViewPayments from './pages/ViewPayments';
@@ -35,6 +36,7 @@ function App(){
 
       <Route path='/makedelivery' element={<MakeDeliveries/>}/>
       <Route path='/viewdelivery' element={<ViewDeliveries/>}/>
+      <Route path='/editdelivery/:id' element={<EditDeliveries/>}/>
 
       <Route path='/makepayment' element={<MakePayments/>}/>
       <Route path='/viewpayment' element={<ViewPayments/>}/>

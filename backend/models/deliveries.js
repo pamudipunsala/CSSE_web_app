@@ -4,6 +4,7 @@ const deliverySchema = new mongoose.Schema({
 
     orderid:{
         type:String,
+        unique: true,
         required:true
     },
     iName:{
@@ -15,11 +16,11 @@ const deliverySchema = new mongoose.Schema({
         required:true
     },
     deliveryPrice:{
-        type:Number,
+        type:String,
         required:true
     },
     TotalPrice:{
-        type:Number,
+        type:String,
         required:true
     },
     stAddress:{
