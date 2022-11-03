@@ -33,7 +33,7 @@ export default class RequestDtl extends Component{
         super(props);
     
         this.state={
-            requests:[],
+            Order:[],
         };
     }
 
@@ -154,7 +154,7 @@ export default class RequestDtl extends Component{
                 <div className="new"> 
                 <form style={{margin: "auto", padding: "15px", maxWidth: "400px", alignContent: "center", backgroundColor: "rgba(0, 0, 0, 0.560)", color:'white'}}>
                     <div >
-                    <h2>Add Delivery Details</h2>
+                    <h2>Request Details</h2>
 
                     <div>
                         <label name="companyName"><b>Company Name</b></label><br/>
@@ -284,7 +284,7 @@ export default class RequestDtl extends Component{
                     <div style={{color: "red"}}><b>{this.state.quantityError}</b></div> */}
 
                     <br/><br/><br/>
-                    <button className="sbtn" type="submit" onClick={this.onSubmit} ><a href="#" style={{textDecoration:'none',color:'white'}}><b>Save</b></a></button><br/>
+                    <button className="sbtn" type="submit" onClick={this.onSubmit} ><a href="#" style={{textDecoration:'none',color:'white'}}><b>Request</b></a></button><br/>
                     </div>
                 </form> 
                 </div>

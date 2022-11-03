@@ -48,11 +48,9 @@ const orderSchema = new mongoose.Schema({
     items:[{
         iName:{
             type:String,
-            required:true
         },
         quantity:{
             type:Number,
-            required:true
         },
         unitPrice:{
             type:Number
