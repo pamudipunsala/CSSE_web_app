@@ -6,7 +6,7 @@ const Header = () => {
     //views
     const showNavigation = () => (
         <nav style={{margin:'5px', paddingLeft:'20px'}} className="navbar navbar-expand-lg navbar-dark bg-dark">
-            <Link to="/" className="navbar-brand" >ABC Company (Pvt) Ltd</Link>
+            <Link to="/" className="navbar-brand" >ABC Company</Link>
             <button 
                 className="navbar-toggler" 
                 type="button" 
