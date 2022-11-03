@@ -581,3 +581,9 @@ input[type="search"]{
   text-align: left;
   
 }
+
+.center {
+  display: flex;
+  justify-content: center;
+
+}
