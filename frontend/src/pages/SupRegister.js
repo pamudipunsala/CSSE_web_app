@@ -36,9 +36,11 @@ const SupRegister = () => {
     }
 
     return (
-        <div className="register-container">
+        <div className="addpayment">
+        <div className='ish'>
+        <div className='center'>
         <div className='row px-3 vh-100'>
-        <div className='col-md-5 mx-auto align-self-center'>
+        <div className='col-md-9 mx-auto align-self-center'>
         <div className="register">
             {console.log("Suppliers", suppliers)}
             <h1>Supplier Registration</h1>
@@ -46,9 +48,11 @@ const SupRegister = () => {
             <input type="text" name="semail" value={suppliers.semail} placeholder="Enter Your Email" onChange={ handleChange }></input>
             <input type="text" name="userName" value={suppliers.userName} placeholder="Enter UserName" onChange={ handleChange }></input>
             <input type="password" name="spwd" value={suppliers.spwd} placeholder="Enter Password" onChange={ handleChange }></input>
-            <div className="button" onClick={supregister} >Register</div>
-            <div>or</div>
-            <div className="button" onClick={() => navigate("/login")}>Login</div>
+            <div className="sbtn" onClick={supregister} style={{textDecoration:'none',color:'white'}} >Register</div>
+            {/* <div>or</div> */}
+            {/* <div className="button" onClick={() => navigate("/login")}>Login</div> */}
+        </div>
+        </div>
         </div>
         </div>
         </div>

@@ -58,7 +58,7 @@ export default class ViewSuppliers extends Component {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-8-mt-2 mb-2">
-                            <h2>All Suppliers</h2>
+                            <h2><b>All Suppliers</b></h2>
                         </div>
                         <div className="col-lg-3 mt-2 mb-2">
                             <input 
@@ -89,18 +89,19 @@ export default class ViewSuppliers extends Component {
                                     <td>{suppliers.userName}</td>
                                     <td>{suppliers.spwd}</td>
                                     <td>
-                                    <a href={`/editSuppliers/${suppliers._id}`} ><button className="btn btn-warning btn-sm"><i className="fas fa-edit"></i>&nbsp;Edit</button></a>
+                                    {/* <a href={`/editSuppliers/${suppliers._id}`} ><button className="btn btn-warning btn-sm"><i className="fas fa-edit"></i>&nbsp;Edit</button></a> */}
                                     
                                     &nbsp;
                                     <button className="btn btn-danger btn-sm" onClick={() => this.onDelete(suppliers._id)}><i className="far fa-trash-alt"></i>&nbsp;
                                     Delete
                                 </button> &nbsp;
-                                    <a href={`/supplier/${suppliers._id}`} ><button className="btn btn-secondary btn-sm"><i className="fa fa-info-circle"></i>&nbsp;View</button></a>
+                                    {/* <a href={`/supplier/${suppliers._id}`} ><button className="btn btn-secondary btn-sm"><i className="fa fa-info-circle"></i>&nbsp;View</button></a> */}
                                     </td>
                             </tr>
                         ))}
                         </tbody>
                     </table>
+                    <button className="abtn" type="button"><a href="/supregister" style={{textDecoration:'none',color:'white'}} required><b>Add Supplier</b></a></button>
                 </div>
             )
         }

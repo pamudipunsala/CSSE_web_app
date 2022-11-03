@@ -60,11 +60,12 @@ function EditDeliveries() {
 
         <div>
             <br />
-            <div className="addpayment">
+            <div className="center">
                 <div className="ish">
                 <button className="abtn" type="button"><a href="/viewdelivery" style={{textDecoration:'none',color:'white'}} required><b>View Deliveries</b></a></button>
-                <div className="new"> 
-                    <h1>Update Delivery Details</h1>
+                <h1><center>Update Delivery Details</center></h1>
+                <div className="center"> 
+                    
                     <br/>
                     <form ref={form} onSubmit={handleSubmit} className="form1">
 
