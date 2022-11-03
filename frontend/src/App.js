@@ -18,6 +18,7 @@ import EditDeliveries from './pages/EditDeliveries';
 import MakePayments from './pages/MakePayments';
 import ViewPayments from './pages/ViewPayments';
 import EditPayments from './pages/EditPayments';
+import PaymentsDetails from './pages/PaymentDetails';
 
 function App(){
   return(
@@ -41,6 +42,7 @@ function App(){
       <Route path='/makepayment' element={<MakePayments/>}/>
       <Route path='/viewpayment' element={<ViewPayments/>}/>
       <Route path='/editpayment/:id' element={<EditPayments/>}/>
+      <Route path='/paymentdetails/:id' element={<PaymentsDetails/>}/>
     </Routes>
   </Router>
   )};

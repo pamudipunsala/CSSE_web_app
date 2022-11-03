@@ -116,7 +116,9 @@ export default class ViewPayments extends Component {
                             {this.state.payments.map((payments,index) => (
                             <tr key={index}>
                                     <th scope="row">{index+1}</th>
-                                    <td>{payments._id}</td>
+                                    <td><a href={`/paymentdetails/${payments._id}`} style={{textDecoration:'none'}}>
+                                    {payments._id}
+                                    </a></td>
                                     <td>{payments.orderid}</td>
                                     <td>{payments.supplierid}</td>
                                     <td>{payments.sname}</td>
