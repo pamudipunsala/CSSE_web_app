@@ -5,7 +5,7 @@ import '../index.css';
 const iState = {
     companyName:"",
     supplier:"",
-    //reqDate:"",
+    reqDate:"",
     stAddress:"",
     city:"",
     province:"",
@@ -99,12 +99,12 @@ export default class RequestDtl extends Component{
 
     onSubmit = (e) =>{
         e.preventDefault();
-        const{companyName, supplier, /*reqDate,*/ stAddress, city, province, zipCode, contact, email, adInfo, /*iName, quantity*/} = this.state;
+        const{companyName, supplier, reqDate, stAddress, city, province, zipCode, contact, email, adInfo, /*iName, quantity*/} = this.state;
 
         const Requests = {
             companyName:companyName,
             supplier:supplier,
-            //reqDate:reqDate,
+            reqDate:reqDate,
             stAddress:stAddress,
             city:city,
             province:province,
@@ -128,7 +128,7 @@ export default class RequestDtl extends Component{
                 this.setState({
                     companyName:"",
                     supplier:"",
-                    //reqDate:"",
+                    reqDate:"",
                     stAddress:"",
                     city:"",
                     province:"",
@@ -178,7 +178,7 @@ export default class RequestDtl extends Component{
                     </div>
                     <div style={{color: "red"}}><b>{this.state.supplierError}</b></div>
 
-                    {/* <div>
+                    <div>
                         <label name="reqDate"><b>Due Date</b></label><br/>
                         <input type="date" 
                             name='reqDate' 
@@ -187,7 +187,7 @@ export default class RequestDtl extends Component{
                             value={this.state.reqDate} 
                             onChange={this.InputChange}/>
                     </div>
-                    <div style={{color: "red"}}><b>{this.state.reqDateError}</b></div> */}
+                    
 
                     <div>
                         <label name="stAddress"><b>Address</b></label><br/>

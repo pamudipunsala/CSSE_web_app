@@ -8,6 +8,7 @@ function EditOrder() {
     const { id } = useParams();
     const form = useRef();
 
+    const [steMan, setSteMan] = useState('');
     const [supplier, setSupplier] = useState('');
     const [reqDate, setReqDate] = useState('');
     const [stAddress, setStAddress] = useState('');
@@ -26,6 +27,7 @@ function EditOrder() {
             
             const orderDetail = res.data.existingOrder;
             console.log(orderDetail)
+            setSteMan(orderDetail.steMan)
             setSupplier(orderDetail.supplier)
             setReqDate(orderDetail.reqDate)
             setStAddress(orderDetail.stAddress)
@@ -41,11 +43,15 @@ function EditOrder() {
         })
 
     }, []);
-
-
+   
+    const calculateTotal = total+items.map((item) => (
+        item.quantity*item.unitPrice
+    )).reduce((a, b) => a + b);
+     
     const handleSubmit = async (e) => {
         e.preventDefault()
         const orderlist = {
+            steMan,
             supplier,
             reqDate,
             stAddress,
@@ -75,7 +81,7 @@ function EditOrder() {
 
     return (
 
-        <div style={{backgroundColor:"#d1d1d1",margin:"5px"}}>
+        <div style={{backgroundColor:"#d1d1d1",margin:"5px",height:"1000px"}}>
             <br />
             <div className="one">
                 <div className="formw">
@@ -84,9 +90,21 @@ function EditOrder() {
                     </div>
                     
                     <br/>
-                    <form ref={form} onSubmit={handleSubmit} className="form1" >
+                    <form ref={form} onSubmit={handleSubmit} className="form1" style={{ marginLeft:"50px", width:"40%", height:"850px"}}>
                         <div style={{backgroundColor:"white", padding:"20px",borderRadius:"10px"}}>
                         <table>
+                        <tr>
+                                <th><b>Site Manager :</b></th>
+                                <td>
+                                    <input type="text"
+                                        className="form-control mb-2"
+                                        name="steMan"
+                                        disabled = "disabled"
+                                        value={steMan}
+                                        onChange={(e) => setSteMan(e.target.value)}
+                                    />
+                                </td>
+                            </tr>
                             <tr>
                                 <th><b>Supplier :</b></th>
                                 <td>
@@ -105,7 +123,7 @@ function EditOrder() {
                                 <input type="text"
                                     className="form-control mb-3"
                                     name="reqDate"
-                                    //disabled = "disabled"
+                                    disabled = "disabled"
                                     value={reqDate}
                                     onChange={(e) => setReqDate(e.target.value)}
                                     />
@@ -177,7 +195,7 @@ function EditOrder() {
                                 <input type="text"
                                     className="form-control mb-3"
                                     name="email"
-                                    disabled = "disabled"
+                                    //disabled = "disabled"
                                     value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                     />
@@ -195,23 +213,7 @@ function EditOrder() {
                                     />
                                 </td>
                             </tr>
-                            <tr>
-                                <th><b>Status :</b></th>
-                                <td>
-                                {/*<input type="text"
-                                    className="form-control mb-3"
-                                    name="status"
-                                    value={status}
-                                    onChange={(e) => setStatus(e.target.value)}
-    />*/}
-                                    <select name="status" id="status">
-                                        <option value={status === 'accepted'} onChange={(e) => setStatus(e.target.value)}>accepted</option>
-                                        <option value={status === 'rejected'} onChange={(e) => setStatus(e.target.value)}>rejected</option>
-                                        
-                                    </select>
-
-                                </td>
-                            </tr>
+                            
                         </table>
                         </div>
                        
@@ -235,22 +237,36 @@ function EditOrder() {
                                 <tr className='tritem'> 
                                     <td style={{padding:"50px"}}>{item.iName}</td>
                                     <td style={{padding:"50px"}}>{item.quantity}</td>
-                                    <td style={{padding:"50px"}}>{item.quantity*item.unitPrice}</td>
+                                    <td style={{padding:"50px"}}>{total+item.quantity*item.unitPrice}</td>
                                 </tr>
+                                
                                 ))} 
                                 <hr/>
                                 <tr>
                                 <td style={{padding:"50px"}}><b>Total Price : </b></td>
                                 <td style={{padding:"50px"}}></td>
-                                <td style={{padding:"50px"}}><b>{total}</b></td>
+                                <td style={{padding:"50px"}}><b>{calculateTotal}</b></td>
                                 </tr>
+                                
                             </table>
-                        
+                            <tr>
+                                <th style={{color:"red"}}><b>Status :</b></th>
+                                <td>
+                                <input type="text"
+                                    className="form-control mb-3"
+                                    name="status"
+                                    value={status}
+                                    onChange={(e) => setStatus(e.target.value)}
+                                    required/>
+                                </td>
+                                <td><button type="submit" className="btn btn-warning"><i className="fas fa-edit"></i>&nbsp; Update </button></td>
+                            </tr>
+                            
                          </div>
                  </div>       
                         
 
-                        <button type="submit" className="btn btn-warning"><i className="fas fa-edit"></i>&nbsp; Update </button>
+                        
 
                     </form>
                 </div>

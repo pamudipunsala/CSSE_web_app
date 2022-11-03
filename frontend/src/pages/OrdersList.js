@@ -27,52 +27,29 @@ export default class OrderList extends Component {
         });
     }
 
-    onDelete = (id) => {
-        axios.delete(`http://localhost:7000/order/delete/${id}`).then((res) => {
-            alert("Delete Successfully");
-            this.retrieveOrders();
-        })
-    }
+   
 
-    filterData(orders, searchKey){
-        const result = orders.filter((orders) =>
-        orders.city.toLowerCase().includes(searchKey)||
-        orders.province.toLowerCase().includes(searchKey)||
-        orders.supplier.toLowerCase().includes(searchKey)||
-        orders.zipCode.toLowerCase().includes(searchKey)
-        )
-
-        this.setState({orders:result});
-    }
-
-    handleSearchArea = (e) => {
-        const searchKey = e.currentTarget.value;
-
-        axios.get("http://localhost:7000/order").then(res => {
-            if (res.data.success) {
-                this.filterData(res.data.existingOrder,searchKey)
-            }
-        });
-    }
     
         render(){
             return (
-                <div className="container">
+                <div style={{backgroundColor:"#d1d1d1",margin:"5px",height:"650px"}}>
+                <div className="container" >
                     <div className="row">
                         <div className="ordersHeader">
-                            <h2>All Orders</h2>
+                            <h3>All Requisitions</h3>
                         </div>
                         
                     </div>
-                    <table >
-                    <div className="table">
+                    <br /><br />
+                    <table style={{marginLeft:"100px", width:"80%", textAlign:"center", paddingLeft:"300px"}}>
+                    <div className="table" >
                         <thead>
                             <tr>
-                                <th scope="col">Order ref.</th>
-                                <th scope="col">Site Manager</th>
-                                <th scope="col">Site Location</th>
-                                <th scope="col">Required Date</th>
-                                <th scope="col">Status</th>
+                                <th scope="col" style={{padding:"20px"}}>Order ref.</th>
+                                <th scope="col" style={{padding:"20px"}}>Site Manager</th>
+                                <th scope="col" style={{padding:"20px"}}>Site Location</th>
+                                <th scope="col" style={{padding:"20px"}}>Required Date</th>
+                                <th scope="col" style={{padding:"20px"}}>Status</th>
             
                             </tr>
                         </thead>
@@ -86,14 +63,11 @@ export default class OrderList extends Component {
                                     <td>{order.city}</td>
                                     <td>{order.reqDate}</td>
                                     <td>{order.status}</td>
-                                    
-                            </tr>
-                        ))}
-                            
-                        
+                            </tr>))}
                         </tbody>
                         </div>
                     </table>
+                </div>
                 </div>
             )
         }
