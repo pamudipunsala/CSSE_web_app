@@ -20,6 +20,10 @@ import ViewPayments from './pages/ViewPayments';
 import EditPayments from './pages/EditPayments';
 import PaymentsDetails from './pages/PaymentDetails';
 
+import RequestDtl from './pages/RequestDtl';
+import ViewRequests from './pages/ViewRequests';
+import EditRequests from './pages/EditReqeusts';
+
 function App(){
   return(
   <Router>
@@ -33,6 +37,7 @@ function App(){
       <Route path='/register' element={<Register/>}/>
       <Route path='/supregister' element={<SupRegister/>}/>
       <Route path='/suppliers' element={<ViewSuppliers/>} />
+
       <Route path='/editSuppliers/:id' element={<EditSupplier/>}/>
 
       <Route path='/makedelivery' element={<MakeDeliveries/>}/>
@@ -43,6 +48,12 @@ function App(){
       <Route path='/viewpayment' element={<ViewPayments/>}/>
       <Route path='/editpayment/:id' element={<EditPayments/>}/>
       <Route path='/paymentdetails/:id' element={<PaymentsDetails/>}/>
+
+
+      <Route path='/requests' element={<RequestDtl/>}/>
+      <Route path='/viewreq' element={<ViewRequests/>}/>
+      <Route path='/requests/update/:id' element={<EditRequests/>}/>
+
     </Routes>
   </Router>
   )};
