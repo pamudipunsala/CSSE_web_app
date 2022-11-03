@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import '../index.css';
 
-const rState = {
+const iState = {
     companyName:"",
     supplier:"",
     //reqDate:"",
@@ -13,89 +13,74 @@ const rState = {
     contact:"",
     email:"",
     adInfo:"",
-    iName:"",
-    quantity:"",
+    // iName:"",
+    // quantity:"",
+
     companyNameError:"",
-    //reqDateError:"",
     stAddressError:"",
     cityError:"",
     provinceError:"",
     zipCodeError:"",
     contactError:"",
+    //iNameError:"",
+    //quantityError:""
 }
 
 export default class RequestDtl extends Component{
-    state = rState;
+    state = iState;
 
     constructor(props){
         super(props);
     
         this.state={
-            reuests:[],
+            requests:[],
         };
     }
 
-    // componentDidMount(){
-    //     this.retrievedata();
-    // }
-
-    // filterData(staff){
-    //     const result = staff.filter((staffmem) =>
-    //         staffmem.staff === "Supervisor"
-    //     )
-
-    //     this.setState({staff:result})
-    // }
-    
-    // retrievedata(){
-    //     axios.get("http://localhost:7000/getstaff").then(res => {
-    //         if (res.data.success) {
-    //             this.setState({
-    //                 specstaff:this.filterData(res.data.staff)
-    //             })
-    //             console.log(this.state.specstaff)
-    //         }
-    //     });
-    // }
-
     validate = () => {
         let companyNameError = "";
-        //let reqDateError = "";
         let stAddressError = "";
         let cityError = "";
         let provinceError = "";
         let zipCodeError = "";
         let contactError = "";
+        //let iNameError = "";
+        //let quantityError = "";
+
         if(!this.state.companyName){
-            companyNameError = 'Group ID field cannot be empty!';
+            companyNameError = 'Company Name field cannot be empty!';
         }
 
-        // if(!this.state.reqDate){
-        //     reqDateError = 'Group Leaders\' field cannot be empty!';
-        // }
-
         if(!this.state.stAddress){
-            stAddressError = 'Member 1 field cannot be empty!';
+            stAddressError = 'Address Name field cannot be empty!';
         }
 
         if(!this.state.city){
-            cityError = 'Member 2 field cannot be empty!';
+            cityError = 'City field cannot be empty!';
         }
 
         if(!this.state.province){
-            provinceError = 'Member 3 field cannot be empty!';
+            provinceError = 'Province field cannot be empty!';
         }
 
         if(!this.state.zipCode){
-            zipCodeError = 'Topic field cannot be empty!';
+            zipCodeError = 'Zip Code field cannot be empty!';
         }
 
         if(!this.state.contact){
-            contactError = 'Supervisor field cannot be empty!';
+            contactError = 'Contact Number field cannot be empty!';
         }
 
-        if(companyNameError || /*reqDateError ||*/ stAddressError || cityError ||provinceError || zipCodeError || contactError ){
-            this.setState({companyNameError, /*reqDateError,*/ stAddressError, cityError, provinceError, zipCodeError, contactError});
+        // if(!this.state.iName){
+        //     iNameError = 'Item Name field cannot be empty!';
+        // }
+
+        // if(!this.state.quantity){
+        //     quantityError = 'Quantity field cannot be empty!';
+        // }
+
+        if(companyNameError || stAddressError || cityError || provinceError || zipCodeError || contactError /* || iNameError || quantityError*/){
+            this.setState({companyNameError, stAddressError, cityError, provinceError, zipCodeError, contactError, /*iNameError, quantityError*/});
             return false;
         }
 
@@ -114,9 +99,9 @@ export default class RequestDtl extends Component{
 
     onSubmit = (e) =>{
         e.preventDefault();
-        const{companyName, supplier, reqDate, stAddress, city, province, zipCode, contact, email, adInfo, iName, quantity} = this.state;
+        const{companyName, supplier, /*reqDate,*/ stAddress, city, province, zipCode, contact, email, adInfo, /*iName, quantity*/} = this.state;
 
-        const rDtl = {
+        const Requests = {
             companyName:companyName,
             supplier:supplier,
             //reqDate:reqDate,
@@ -127,18 +112,18 @@ export default class RequestDtl extends Component{
             contact:contact,
             email:email,
             adInfo:adInfo,
-            iName:iName,
-            quantity:quantity,
+            // iName:iName,
+            // quantity:quantity,
         }
 
-        //console.log(customer)
+     
         const isValid = this.validate();
         if (isValid) {
             console.log(this.state);
-            this.setState(rState);
+            this.setState(iState);
     
-        axios.post("http://localhost:7000/request/insert",rDtl).then((res) => {               
-            alert("Details added successfully!");
+        axios.post("http://localhost:7000/order/save",Requests).then((res) => {               
+            alert("Request Sent!");
             if(res.data.success){
                 this.setState({
                     companyName:"",
@@ -151,8 +136,8 @@ export default class RequestDtl extends Component{
                     contact:"",
                     email:"",
                     adInfo:"",
-                    iName:"",
-                    quantity:"",
+                    // iName:"",
+                    // quantity:"",
                 })
             }
         }).catch((err)=>{
@@ -163,185 +148,146 @@ export default class RequestDtl extends Component{
 
     render(){
         return (
-            <div className="addtopic">
+            <div className="addpayment">
                 <div className="ish">
-                <button className="abtn" type="button"><a href="/" style={{textDecoration:'none',color:'black'}} required><b>View Details</b></a></button>
-                <form style={{margin: "auto", padding: "15px", maxWidth: "400px", alignContent: "center", }}>
+                <button className="abtn" type="button"><a href="/" style={{textDecoration:'none',color:'white'}} required><b>View Requests</b></a></button>
+                <div className="new"> 
+                <form style={{margin: "auto", padding: "15px", maxWidth: "400px", alignContent: "center", backgroundColor: "rgba(0, 0, 0, 0.560)", color:'white'}}>
                     <div >
-                    <h2>Insert Request Details</h2>
+                    <h2>Add Delivery Details</h2>
 
                     <div>
                         <label name="companyName"><b>Company Name</b></label><br/>
                         <input type="text" 
                             name='companyName' 
                             id='companyName' 
-                            placeholder="Eg:Gamage Company" 
+                            placeholder="Eg:ABC Company" 
                             value={this.state.companyName} 
                             onChange={this.InputChange}/>
                     </div>
-                    <div style={{color: "red"}}>{this.state.companyNameError}</div>
+                    <div style={{color: "red"}}><b>{this.state.companyNameError}</b></div>
                     
                     <div>
                         <label name="supplier"><b>Supplier Name</b></label><br/>
                         <input type="text" 
                             name='supplier' 
                             id='supplier' 
-                            placeholder="select supplier" 
+                            placeholder="Eg:Perera G.H." 
                             value={this.state.supplier} 
                             onChange={this.InputChange}/>
                     </div>
+                    <div style={{color: "red"}}><b>{this.state.supplierError}</b></div>
 
                     {/* <div>
                         <label name="reqDate"><b>Due Date</b></label><br/>
-                        <input type="text" 
+                        <input type="date" 
                             name='reqDate' 
                             id='reqDate' 
-                            placeholder="Enter the date you want to recieve the order" 
+                            placeholder="Eg:100kg" 
                             value={this.state.reqDate} 
                             onChange={this.InputChange}/>
-                    </div> */}
+                    </div>
+                    <div style={{color: "red"}}><b>{this.state.reqDateError}</b></div> */}
 
                     <div>
                         <label name="stAddress"><b>Address</b></label><br/>
                         <input type="text" 
                             name='stAddress' 
                             id='stAddress' 
-                            placeholder="Eg:Perera K.L." 
+                            placeholder="Eg:Sri Lanka" 
                             value={this.state.stAddress} 
                             onChange={this.InputChange}/>
                     </div>
-                    <div style={{color: "red"}}>{this.state.stAddressError}</div>
+                    <div style={{color: "red"}}><b>{this.state.stAddressError}</b></div>
 
                     <div>
                         <label name="city"><b>City</b></label><br/>
                         <input type="text" 
                             name='city' 
                             id='city' 
-                            placeholder="Eg:Perera K.L." 
+                            placeholder="Eg:Colombo" 
                             value={this.state.city} 
                             onChange={this.InputChange}/>
                     </div>
-                    <div style={{color: "red"}}>{this.state.cityError}</div>
+                    <div style={{color: "red"}}><b>{this.state.cityError}</b></div>
 
                     <div>
                         <label name="province"><b>Province</b></label><br/>
                         <input type="text" 
                             name='province' 
                             id='province' 
-                            placeholder="Eg:Management Tool" 
+                            placeholder="Eg:Western" 
                             value={this.state.province} 
                             onChange={this.InputChange}/>
                     </div>
-                    <div style={{color: "red"}}>{this.state.provinceError}</div><br/>
-
-
-                    {/* <div>
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                <th scope="col">Reg.No</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Type</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.state.staff.map((staff,index) => (
-                                    <tr key={index}>
-                                    <th>{staff.lregNo}</th>
-                                    <td>{staff.lname}</td>
-                                    <td>{staff.staff}</td>   
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div> */}
+                    <div style={{color: "red"}}><b>{this.state.provinceError}</b></div>
 
                     <div>
                         <label name="zipCode"><b>Zip Code</b></label><br/>
-                        <input type="text" 
+                        <input type="number" 
                             name='zipCode' 
                             id='zipCode' 
-                            placeholder="Eg:Perera M.F." 
                             value={this.state.zipCode} 
                             onChange={this.InputChange}/>
                     </div>
-                    <div style={{color: "red"}}>{this.state.zipCodeError}</div>
-
-                    {/* <div>
-                        <table className="table">
-                            <thead>
-                                <tr>
-                                <th scope="col">Reg.No</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Type</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {this.state.staff1.map((staff,index) => (
-                                    <tr key={index}>
-                                    <th>{staff.lregNo}</th>
-                                    <td>{staff.lname}</td>
-                                    <td>{staff.staff}</td>   
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div> */}
+                    <div style={{color: "red"}}><b>{this.state.zipCodeError}</b></div>
 
                     <div>
                         <label name="contact"><b>Contact Number</b></label><br/>
                         <input type="text" 
                             name='contact' 
                             id='contact' 
-                            placeholder="Eg:Perera M.F." 
                             value={this.state.contact} 
                             onChange={this.InputChange}/>
                     </div>
-                    <div style={{color: "red"}}>{this.state.contactError}</div>
+                    <div style={{color: "red"}}><b>{this.state.contactError}</b></div>
 
                     <div>
                         <label name="email"><b>Email</b></label><br/>
-                        <input type="text" 
+                        <input type="email" 
                             name='email' 
                             id='email' 
-                            placeholder="Eg:perera@gmail.com" 
                             value={this.state.email} 
                             onChange={this.InputChange}/>
                     </div>
+                    <div style={{color: "red"}}><b>{this.state.emailError}</b></div>
 
                     <div>
                         <label name="adInfo"><b>Additional Information</b></label><br/>
                         <input type="text" 
+                            min="2018-01-01" max="2030-12-31" 
                             name='adInfo' 
                             id='adInfo' 
                             value={this.state.adInfo} 
                             onChange={this.InputChange}/>
                     </div>
+                    <div style={{color: "red"}}><b>{this.state.adInfoError}</b></div>
 
-                    <div>
+                    {/* <div>
                         <label name="iName"><b>Item Name</b></label><br/>
                         <input type="text" 
                             name='iName' 
                             id='iName' 
-                            placeholder="Eg:Soil" 
                             value={this.state.iName} 
                             onChange={this.InputChange}/>
                     </div>
+                    <div style={{color: "red"}}><b>{this.state.iNameError}</b></div>
 
                     <div>
                         <label name="quantity"><b>Quantity</b></label><br/>
-                        <input type="text" 
+                        <input type="number" 
                             name='quantity' 
                             id='quantity' 
-                            placeholder="Eg:5 cubes" 
                             value={this.state.quantity} 
                             onChange={this.InputChange}/>
                     </div>
+                    <div style={{color: "red"}}><b>{this.state.quantityError}</b></div> */}
 
-                    <br/><br/>
-                    <button className="sbtn" type="submit" onClick={this.onSubmit} ><a href="/" style={{textDecoration:'none',color:'black'}}><b>Save</b></a></button><br/>
+                    <br/><br/><br/>
+                    <button className="sbtn" type="submit" onClick={this.onSubmit} ><a href="#" style={{textDecoration:'none',color:'white'}}><b>Save</b></a></button><br/>
                     </div>
                 </form> 
+                </div>
                 </div>
             </div>
         )
